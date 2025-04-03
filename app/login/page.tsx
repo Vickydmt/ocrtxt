@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
@@ -36,18 +35,10 @@ export default function LoginPage() {
     try {
       setIsLoading(true)
       await login(email, password)
-      toast({
-        title: "Login successful",
-        description: "Welcome back to DocuDigitize",
-      })
+      toast({ title: "Login successful", description: "Welcome back!" })
       router.push("/dashboard")
     } catch (error: any) {
-      console.error("Login error:", error)
-      toast({
-        title: "Login failed",
-        description: error.message || "Invalid email or password",
-        variant: "destructive",
-      })
+      toast({ title: "Login failed", description: error.message, variant: "destructive" })
     } finally {
       setIsLoading(false)
     }
@@ -57,56 +48,22 @@ export default function LoginPage() {
     <div className="container mx-auto py-10 px-4">
       <div className="max-w-md mx-auto">
         <Card>
-          <CardHeader className="space-y-1">
+          <CardHeader>
             <CardTitle className="text-2xl font-bold">Login</CardTitle>
             <CardDescription>Enter your credentials to access your account</CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit}>
             <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="name@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <Label htmlFor="password">Password</Label>
-                  <Link href="/forgot-password" className="text-sm text-primary hover:underline">
-                    Forgot password?
-                  </Link>
-                </div>
-                <Input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" type="email" placeholder="name@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+
+              <Label htmlFor="password">Password</Label>
+              <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
             </CardContent>
-            <CardFooter className="flex flex-col space-y-4">
+            <CardFooter>
               <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Logging in...
-                  </>
-                ) : (
-                  "Login"
-                )}
+                {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Login"}
               </Button>
-              <div className="text-center text-sm">
-                Don't have an account?{" "}
-                <Link href="/register" className="text-primary hover:underline">
-                  Register
-                </Link>
-              </div>
             </CardFooter>
           </form>
         </Card>
@@ -114,4 +71,3 @@ export default function LoginPage() {
     </div>
   )
 }
-
