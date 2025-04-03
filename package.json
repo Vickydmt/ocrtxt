@@ -69,7 +69,14 @@
     "axios": "latest",
     "mongodb": "latest",
     "framer-motion": "latest",
-    "firebase": "latest"
+    "firebase": "latest",
+    "tesseract.js": "latest",
+    "@azure/ai-form-recognizer": "^5.0.0",
+    "axios": "^1.0.0",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "@google-cloud/vision": "^3.0.0"
   },
   "devDependencies": {
     "@types/node": "^22",
