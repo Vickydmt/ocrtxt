@@ -76,8 +76,7 @@
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "@google-cloud/vision": "^3.0.0",
-    "opencv.js": "^1.2.1"
+    "@google-cloud/vision": "^3.0.0"
 
   },
   "devDependencies": {
