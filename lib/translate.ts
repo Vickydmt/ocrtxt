@@ -1,19 +1,41 @@
-// This is a mock implementation for demo purposes
-// In a real application, this would call a translation API
+export async function translateText(
+  text: string, 
+  targetLanguage: string, 
+  sourceLanguage = "auto"
+): Promise<string> {
+  try {
+    const apiKey = "AIzaSyA2xoFUwlBNOK112_DwXJy2Pq5Tqlp_7PA"; // Your API key
 
-export async function translateText(text: string, targetLanguage: string, sourceLanguage = "auto"): Promise<string> {
-  // Simulate API call delay
-  await new Promise((resolve) => setTimeout(resolve, 2000))
+    const response = await fetch(
+      `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          q: text,
+          target: targetLanguage,
+          source: sourceLanguage !== "auto" ? sourceLanguage : undefined,
+          format: "text",
+        }),
+      }
+    );
 
-  // In a real implementation, you would call a translation API like Google Translate
-  // For demo purposes, return a mock translation
-  return `This is a simulated translation of the text into ${getLanguageName(targetLanguage)}. 
-In a real implementation, this would be the actual translated text from a service like Google Translate.
-The translation would convert the content from ${getLanguageName(sourceLanguage)} to ${getLanguageName(targetLanguage)}.
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.statusText}`);
+    }
 
-The quality of the translation would depend on the service used and the language pair.`
+    const data = await response.json();
+
+    return data.data.translations[0].translatedText;
+  } catch (error) {
+    console.error("Translation error:", error);
+    throw new Error("Failed to translate text");
+  }
 }
 
+// Function to get language names for display
 function getLanguageName(languageCode: string): string {
   const languages: Record<string, string> = {
     en: "English",
@@ -27,9 +49,8 @@ function getLanguageName(languageCode: string): string {
     ml: "Malayalam",
     pa: "Punjabi",
     ur: "Urdu",
-    auto: "Auto-detected language",
-  }
+    auto: "Auto-detect",
+  };
 
-  return languages[languageCode] || languageCode
+  return languages[languageCode] || languageCode;
 }
-
