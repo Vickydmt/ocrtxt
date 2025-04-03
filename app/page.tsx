@@ -48,7 +48,7 @@ export default function Home() {
           <FileText className="h-12 w-12 mb-4 text-primary" />
           <h2 className="text-2xl font-semibold mb-2">OCR Processing</h2>
           <p className="text-muted-foreground mb-4">
-            Advanced OCR technology to recognize handwritten text in multiple regional languages.
+            About Our Advanced OCR technology to recognize handwritten text in multiple regional languages.
           </p>
           <div className="mt-auto">
             <Button variant="outline" asChild>
