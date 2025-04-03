@@ -30,21 +30,6 @@ export default function Home() {
         </Card>
 
         <Card className="flex flex-col items-center text-center p-6">
-          <FileText className="h-12 w-12 mb-4 text-primary" />
-          <h2 className="text-2xl font-semibold mb-2">OCR Processing</h2>
-          <p className="text-muted-foreground mb-4">
-            Advanced OCR technology to recognize handwritten text in multiple regional languages.
-          </p>
-          <div className="mt-auto">
-            <Button variant="outline" asChild>
-              <Link href="/how-it-works">
-                Learn More <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        </Card>
-
-        <Card className="flex flex-col items-center text-center p-6">
           <Search className="h-12 w-12 mb-4 text-primary" />
           <h2 className="text-2xl font-semibold mb-2">Search & Access</h2>
           <p className="text-muted-foreground mb-4">
@@ -58,6 +43,22 @@ export default function Home() {
             </Button>
           </div>
         </Card>
+        
+       <Card className="flex flex-col items-center text-center p-6">
+          <FileText className="h-12 w-12 mb-4 text-primary" />
+          <h2 className="text-2xl font-semibold mb-2">OCR Processing</h2>
+          <p className="text-muted-foreground mb-4">
+            Advanced OCR technology to recognize handwritten text in multiple regional languages.
+          </p>
+          <div className="mt-auto">
+            <Button variant="outline" asChild>
+              <Link href="/how-it-works">
+                Learn More <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        </Card>
+        
       </div>
 
       <div className="bg-muted rounded-lg p-8 mb-16">
