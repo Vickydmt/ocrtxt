@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 
 // Configuration (move to environment variables in production)
-const GOOGLE_VISION_API_KEY = process.env.REACT_APP_GOOGLE_VISION_API_KEY || "your_api_key";
+const GOOGLE_VISION_API_KEY = process.env.REACT_APP_GOOGLE_VISION_API_KEY || "AIzaSyA2xoFUwlBNOK112_DwXJy2Pq5Tqlp_7PA";
 const GOOGLE_VISION_ENDPOINT = `https://vision.googleapis.com/v1/images:annotate?key=${GOOGLE_VISION_API_KEY}`;
 
 // Type definitions
