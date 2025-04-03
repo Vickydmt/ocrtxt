@@ -77,7 +77,8 @@
     "react": "latest",
     "react-dom": "latest",
     "@google-cloud/vision": "^3.0.0",
-    "opencv.js": "^1.5.0"
+    "opencv.js": "^1.2.1"
+
   },
   "devDependencies": {
     "@types/node": "^22",
