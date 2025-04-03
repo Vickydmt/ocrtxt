@@ -1,14 +1,14 @@
-import { initializeApp } from "firebase/app"
+import { initializeApp, getApps, getApp, FirebaseApp } from "firebase/app"
 import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-  type User,
+  User,
 } from "firebase/auth"
 
-// Your web app's Firebase configuration
+// Your Firebase Configuration (Keeping your original credentials)
 const firebaseConfig = {
   apiKey: "AIzaSyAW2lapzV00nxutaXCHuNwsYNXnTMgnKzE",
   authDomain: "login-78e38.firebaseapp.com",
@@ -18,22 +18,38 @@ const firebaseConfig = {
   appId: "1:739641169342:web:04b6fef292ebe0acee15ef",
 }
 
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig)
+// Initialize Firebase (Avoid duplicate initialization)
+const app: FirebaseApp = getApps().length ? getApp() : initializeApp(firebaseConfig)
 const auth = getAuth(app)
 
-// Authentication functions
-export const loginWithEmail = (email: string, password: string) => {
-  return signInWithEmailAndPassword(auth, email, password)
+// Authentication functions with error handling
+export const loginWithEmail = async (email: string, password: string): Promise<User | null> => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password)
+    return userCredential.user
+  } catch (error: any) {
+    console.error("Login Error:", error.message)
+    throw new Error(error.message)
+  }
 }
 
-export const registerWithEmail = (email: string, password: string) => {
-  return createUserWithEmailAndPassword(auth, email, password)
+export const registerWithEmail = async (email: string, password: string): Promise<User | null> => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+    return userCredential.user
+  } catch (error: any) {
+    console.error("Registration Error:", error.message)
+    throw new Error(error.message)
+  }
 }
 
-export const logoutUser = () => {
-  return signOut(auth)
+export const logoutUser = async (): Promise<void> => {
+  try {
+    await signOut(auth)
+  } catch (error: any) {
+    console.error("Logout Error:", error.message)
+    throw new Error(error.message)
+  }
 }
 
 export const getCurrentUser = (): Promise<User | null> => {
@@ -45,5 +61,5 @@ export const getCurrentUser = (): Promise<User | null> => {
   })
 }
 
+// Export auth instance
 export { auth }
-
